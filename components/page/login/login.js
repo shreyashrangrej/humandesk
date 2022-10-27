@@ -5,12 +5,17 @@ import { supabase } from "../../../util/supabaseClient"
 export default function Login() {
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
+    const [invited, isInvited] = useState(true)
 
     async function login() {
         const { error, data } = await supabase.auth.signInWithOtp({
             email
         })
         if (error) {
+            debugger;
+            if (error.status === 403) {
+                isInvited(false)
+            }
             console.log({ error })
         } else {
             setSubmitted(true)
@@ -33,11 +38,21 @@ export default function Login() {
                             </label>
                             <button className="btn btn-primary" onClick={() => login()}>Login</button>
                             {
-                                submitted === true && (
+                                submitted === true && invited === true && (
                                     <div className="alert alert-success shadow-lg">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                             <span>Please check your Email!</span>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            {
+                                invited === false && (
+                                    <div className="alert alert-error shadow-lg">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            <span>User Not Invited!</span>
                                         </div>
                                     </div>
                                 )

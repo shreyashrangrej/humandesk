@@ -1,16 +1,16 @@
 import '../styles/globals.css'
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { supabase } from '../util/supabaseClient'
 import { useRouter } from 'next/router'
-import NavBar from '../components/shared/navbar'
 
 function MyApp({ Component, pageProps }) {
   const [authenticatedState, setAuthenticatedState] = useState('not-authenticated')
   const router = useRouter()
 
   useEffect(() => {
+    debugger;
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      debugger;
       handleAuthChange(event, session)
       if (event === 'SIGNED_IN') {
         setAuthenticatedState('authenticated')
