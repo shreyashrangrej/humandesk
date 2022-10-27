@@ -46,8 +46,7 @@ function MyApp({ Component, pageProps }) {
   return (
     
     <div>
-      <NavBar />
-      <nav style={navStyle}>
+      {/* <nav style={navStyle}>
         <Link href='/'>
           <a style={linkStyle}>Home</a>
         </Link>
@@ -64,7 +63,7 @@ function MyApp({ Component, pageProps }) {
         <Link href='/protected'>
         <a style={linkStyle}>Protected</a>
         </Link>
-      </nav>
+      </nav> */}
       <Component {...pageProps} />
     </div>
   )
