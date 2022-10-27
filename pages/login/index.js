@@ -1,7 +1,6 @@
 import { useState } from "react";
-import styles from '../styles/Home.module.css'
 
-import { supabase } from '../util/supabaseClient'
+import { supabase } from '../../util/supabaseClient'
 
 export default function Signin() {
     const [email, setEmail] = useState('')
@@ -9,9 +8,8 @@ export default function Signin() {
 
     async function signIn() {
         if (!email) return
-        const { data, error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signInWithOtp({
             email,
-            password: 'Shreyash@26',
         })
         if (error) {
             console.log({ error })
@@ -22,7 +20,7 @@ export default function Signin() {
 
     if (submitted) {
         return (
-            <div className={styles.container}>
+            <div>
                 <h1>
                     Please check your email to signIn
                 </h1>
@@ -31,9 +29,9 @@ export default function Signin() {
     }
 
     return (
-        <div className={styles.container}>
-            <main className={styles.main}>
-                <h1 className={styles.title}>
+        <div>
+            <main>
+                <h1>
                     Sign In
                 </h1>
                 <input onChange={e => setEmail(e.target.value)} style={{ margin:10 }} />

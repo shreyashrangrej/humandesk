@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { supabase } from '../util/supabaseClient'
 import { useRouter } from 'next/router'
+import NavBar from '../components/shared/navbar'
 
 function MyApp({ Component, pageProps }) {
   const [authenticatedState, setAuthenticatedState] = useState('not-authenticated')
@@ -43,7 +44,9 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
+    
     <div>
+      <NavBar />
       <nav style={navStyle}>
         <Link href='/'>
           <a style={linkStyle}>Home</a>
@@ -53,7 +56,7 @@ function MyApp({ Component, pageProps }) {
         </Link>
         {
           authenticatedState === 'not-authenticated' || (
-            <Link href='/signin'>
+            <Link href='/login'>
               <a style={linkStyle}>Sign In</a>
             </Link>
           )
